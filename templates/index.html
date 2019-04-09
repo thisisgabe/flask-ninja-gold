@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Great Number Game</title>
+</head>
+<body>
+    <div class="container">
+        <div class="score_header">
+            <p>Your Gold: </p>
+            <input type="text" class="totalGold" value="{{game_info.number_coins}}"readonly>
+        </div>
+        <div class="content">
+            <div class="gold_box">
+                <h2>Farm</h2>
+                <p>(earns 10-20 gold)</p>
+                <form action="/process_money" method="POST">
+                    <input type="hidden" name="building_type" value="0">
+                    <button type="submit">Find Gold!</button>
+                </form>
+            </div>
+            <div class="gold_box">
+                <h2>Cave</h2>
+                <p>(earns 5-10 gold)</p>
+                <form action="/process_money" method="POST">
+                    <input type="hidden" name="building_type" value="1">
+                    <button type="submit">Find Gold!</button>
+                </form>
+            </div>
+            <div class="gold_box">
+                <h2>House</h2>
+                <p>(earns 2-5 gold)</p>
+                <form action="/process_money" method="POST">
+                    <input type="hidden" name="building_type" value="2">
+                    <button type="submit">Find Gold!</button>
+                </form>
+            </div>
+            <div class="gold_box">
+                <h2>Casino</h2>
+                <p>(earns/takes 0-50 gold)</p>
+                <form action="/process_money" method="POST">
+                    <input type="hidden" name="building_type" value="3">
+                    <button type="submit">Find Gold!</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="game_log">
+                <ul>
+                    {% if game_info.activity_log %}
+                    {% for item in game_info.activity_log %}
+                    <li class="{{item.color}}">{{item.text}}</li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
